@@ -36,7 +36,7 @@ let randomWord;
 
 let score = 0;
 
-let time = 60;
+let time = 10;
 
 // Start counting down
 const timeInterval = setInterval(updateTime, 1000);
@@ -94,5 +94,8 @@ text.addEventListener("input", (e) => {
     addWordToDOM();
     updateScore();
     e.target.value = "";
+    time += 5;
+
+    updateTime();
   }
 });
