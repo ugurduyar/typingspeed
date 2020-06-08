@@ -37,6 +37,17 @@ let randomWord;
 let score = 0;
 
 let time = 10;
+// Save difficulty to the local storage
+let difficulty =
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "medium";
+
+// Set difficulty select value
+difficultySelect.value =
+  localStorage.getItem("difficulty") !== null
+    ? localStorage.getItem("difficulty")
+    : "medium";
 
 // Start counting down
 const timeInterval = setInterval(updateTime, 1000);
@@ -86,7 +97,6 @@ function updateScore() {
 }
 
 // Event listener
-
 text.addEventListener("input", (e) => {
   const insertedText = e.target.value;
 
@@ -94,8 +104,23 @@ text.addEventListener("input", (e) => {
     addWordToDOM();
     updateScore();
     e.target.value = "";
-    time += 5;
+    if (difficulty === "hard") {
+      time += 2;
+    } else if (difficulty === "medium") {
+      time += 3;
+    } else {
+      time += 4;
+    }
 
     updateTime();
   }
+});
+
+// Settings button click
+settingsBtn.addEventListener("click", () => settings.classList.toggle("hide"));
+
+// Settings select
+settingsForm.addEventListener("change", (e) => {
+  difficulty = e.target.value;
+  localStorage.setItem("difficulty", difficulty);
 });
