@@ -31,3 +31,32 @@ const words = [
   "drag",
   "loving",
 ];
+
+let randomWord;
+
+let score = 0;
+
+let time = 10;
+// Generate random word from array
+function getRandomWord() {
+  return words[Math.floor(Math.random() * words.length)];
+}
+
+function addWordToDOM() {
+  randomWord = getRandomWord();
+  word.innerHTML = randomWord;
+}
+
+addWordToDOM();
+
+// Event listener
+
+text.addEventListener("input", (e) => {
+  const insertedText = e.target.value;
+
+  if (insertedText === randomWord) {
+    addWordToDOM();
+
+    e.target.value = "";
+  }
+});
